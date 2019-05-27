@@ -1,7 +1,8 @@
-﻿using FuckASAC.Helper;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using FuckASAC.NBT.IO;
+using FuckASAC.NBT.Helper;
+
 namespace FuckASAC.NBT
 {
     public class TagByteArray : TagBase

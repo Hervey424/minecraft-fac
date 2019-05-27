@@ -37,9 +37,8 @@
             this.btnCopy = new System.Windows.Forms.Button();
             this.cbServer = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtport = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lbMsg = new System.Windows.Forms.Label();
+            this.rb1710 = new System.Windows.Forms.RadioButton();
+            this.rb1122 = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // label1
@@ -53,7 +52,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(15, 149);
+            this.btnStart.Location = new System.Drawing.Point(15, 124);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 2;
@@ -64,7 +63,7 @@
             // btnStop
             // 
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(113, 149);
+            this.btnStop.Location = new System.Drawing.Point(113, 124);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 23);
             this.btnStop.TabIndex = 3;
@@ -75,7 +74,7 @@
             // lblTip
             // 
             this.lblTip.AutoSize = true;
-            this.lblTip.Location = new System.Drawing.Point(14, 72);
+            this.lblTip.Location = new System.Drawing.Point(14, 70);
             this.lblTip.Name = "lblTip";
             this.lblTip.Size = new System.Drawing.Size(281, 12);
             this.lblTip.TabIndex = 6;
@@ -85,7 +84,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label2.Location = new System.Drawing.Point(14, 123);
+            this.label2.Location = new System.Drawing.Point(14, 99);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(347, 12);
             this.label2.TabIndex = 7;
@@ -93,7 +92,7 @@
             // 
             // btnCopy
             // 
-            this.btnCopy.Location = new System.Drawing.Point(322, 67);
+            this.btnCopy.Location = new System.Drawing.Point(322, 65);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(75, 23);
             this.btnCopy.TabIndex = 8;
@@ -113,47 +112,41 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 43);
+            this.label3.Location = new System.Drawing.Point(14, 40);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 10;
-            this.label3.Text = "本地端口：";
+            this.label3.Text = "游戏版本：";
             // 
-            // txtport
+            // rb1710
             // 
-            this.txtport.Location = new System.Drawing.Point(78, 38);
-            this.txtport.Name = "txtport";
-            this.txtport.Size = new System.Drawing.Size(110, 21);
-            this.txtport.TabIndex = 11;
-            this.txtport.Text = "25555";
+            this.rb1710.AutoSize = true;
+            this.rb1710.Checked = true;
+            this.rb1710.Location = new System.Drawing.Point(78, 38);
+            this.rb1710.Name = "rb1710";
+            this.rb1710.Size = new System.Drawing.Size(59, 16);
+            this.rb1710.TabIndex = 11;
+            this.rb1710.TabStop = true;
+            this.rb1710.Text = "1.7.10";
+            this.rb1710.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // rb1122
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(196, 43);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(161, 12);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "如果不提示冲突就不需要修改";
-            // 
-            // lbMsg
-            // 
-            this.lbMsg.AutoSize = true;
-            this.lbMsg.ForeColor = System.Drawing.Color.Red;
-            this.lbMsg.Location = new System.Drawing.Point(15, 98);
-            this.lbMsg.Name = "lbMsg";
-            this.lbMsg.Size = new System.Drawing.Size(41, 12);
-            this.lbMsg.TabIndex = 13;
-            this.lbMsg.Text = "label5";
+            this.rb1122.AutoSize = true;
+            this.rb1122.Location = new System.Drawing.Point(143, 38);
+            this.rb1122.Name = "rb1122";
+            this.rb1122.Size = new System.Drawing.Size(59, 16);
+            this.rb1122.TabIndex = 12;
+            this.rb1122.Text = "1.12.2";
+            this.rb1122.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(420, 194);
-            this.Controls.Add(this.lbMsg);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtport);
+            this.ClientSize = new System.Drawing.Size(420, 165);
+            this.Controls.Add(this.rb1122);
+            this.Controls.Add(this.rb1710);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cbServer);
             this.Controls.Add(this.btnCopy);
@@ -167,7 +160,7 @@
             this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AnotherAntiCheat - 交流群:543258992";
+            this.Text = "反AnotherAntiCheat - 交流群:543258992";
             this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -184,9 +177,8 @@
         private System.Windows.Forms.Button btnCopy;
         private System.Windows.Forms.ComboBox cbServer;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtport;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lbMsg;
+        private System.Windows.Forms.RadioButton rb1710;
+        private System.Windows.Forms.RadioButton rb1122;
     }
 }
 

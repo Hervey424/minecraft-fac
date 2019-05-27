@@ -2,7 +2,7 @@
 using System.Text;
 using System.IO;
 
-namespace FuckASAC.Helper
+namespace FuckASAC.NBT.Helper
 {
     public static class StreamHelper
     {

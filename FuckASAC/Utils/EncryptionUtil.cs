@@ -3,19 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FuckASAC.Helpers
+namespace FuckASAC.Utils
 {
-    public class Crypto
+    /// <summary>
+    /// 加密
+    /// </summary>
+    public class EncryptionUtil
     {
-        public static string Md5(string input)
+        /// <summary>
+        /// md5加密
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string MD5(string input)
         {
-            // Use input string to calculate MD5 hash
             using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
             {
-                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+                byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(input);
                 byte[] hashBytes = md5.ComputeHash(inputBytes);
 
-                // Convert the byte array to hexadecimal string
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < hashBytes.Length; i++)
                 {

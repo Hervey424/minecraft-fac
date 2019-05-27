@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FuckASAC.NBT;
 
-namespace FuckASAC.Helper
+namespace FuckASAC.NBT
 {
     public static class TagCompoundHelper
     {

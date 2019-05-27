@@ -1,5 +1,4 @@
-﻿using FuckASAC.Helper;
-using FuckASAC.NBT.IO;
+﻿using FuckASAC.NBT.IO;
 using System.IO;
 using System.Collections.Generic;
 using System.Collections;

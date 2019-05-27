@@ -5,9 +5,12 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 
-namespace FuckASAC.Helpers
+namespace FuckASAC.Utils
 {
-    public class Gzip
+    /// <summary>
+    /// GZIP压缩和解压缩
+    /// </summary>
+    public class GzipUtil
     {
         /// <summary>
         /// GZip压缩
@@ -24,7 +27,7 @@ namespace FuckASAC.Helpers
         }
 
         /// <summary>
-        /// ZIP解压
+        /// GZIP解压
         /// </summary>
         /// <param name="zippedData"></param>
         /// <returns></returns>

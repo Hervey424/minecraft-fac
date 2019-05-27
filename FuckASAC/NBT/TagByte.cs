@@ -1,6 +1,6 @@
-﻿using FuckASAC.Helper;
-using System.IO;
+﻿using System.IO;
 using FuckASAC.NBT.IO;
+using FuckASAC.NBT.Helper;
 
 namespace FuckASAC.NBT
 {
