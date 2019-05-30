@@ -34,7 +34,7 @@ namespace FuckASAC.Models
                     }
                     else
                     {
-                        channelDataLength = br.ReadInt16BE();
+                        channelDataLength = br.ReadUInt16BE();
                     }
                     this.ChannelData = br.ReadBytes(channelDataLength);
                 }
