@@ -60,9 +60,9 @@ namespace FuckASAC.Utils
         /// <returns></returns>
         public static Package ReadPackage(this BinaryReader reader)
         {
-            //List<byte> packageLengthBytes1 = new List<byte>();
-            int packageLength = reader.ReadVarInt();
-            byte[] packageLengthBytes = ProtoBufUtil.GetVarIntBytes(packageLength);
+            List<byte> packageLengthBytes = new List<byte>();
+            int packageLength = reader.ReadVarInt(packageLengthBytes);
+            //byte[] packageLengthBytes = ProtoBufUtil.GetVarIntBytes(packageLength);
             byte[] packageData = reader.ReadBytes(packageLength);
 
             List<byte> originData = new List<byte>();
