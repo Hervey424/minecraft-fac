@@ -86,9 +86,9 @@
             this.label2.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.label2.Location = new System.Drawing.Point(14, 99);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(347, 12);
+            this.label2.Size = new System.Drawing.Size(239, 12);
             this.label2.TabIndex = 7;
-            this.label2.Text = "此软件只针对AnotherAntiCheat1.0.6-1.1.2, 游戏版本为1.7.10";
+            this.label2.Text = "此软件只针对AnotherAntiCheat1.0.6-1.1.2";
             // 
             // btnCopy
             // 
@@ -160,7 +160,7 @@
             this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "反AnotherAntiCheat - 交流群:543258992";
+            this.Text = "反AnotherAntiCheat V1.0 - 交流群:543258992";
             this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

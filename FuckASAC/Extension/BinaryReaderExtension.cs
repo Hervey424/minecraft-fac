@@ -60,6 +60,7 @@ namespace FuckASAC.Utils
         /// <returns></returns>
         public static Package ReadPackage(this BinaryReader reader)
         {
+            //List<byte> packageLengthBytes1 = new List<byte>();
             int packageLength = reader.ReadVarInt();
             byte[] packageLengthBytes = ProtoBufUtil.GetVarIntBytes(packageLength);
             byte[] packageData = reader.ReadBytes(packageLength);
@@ -69,7 +70,7 @@ namespace FuckASAC.Utils
             originData.AddRange(packageData);
 
             //如果压缩了, 就获取压缩后的数据
-            if(Global.isCompression)
+            if (Global.isCompression)
             {
                 using (MemoryStream ms = new MemoryStream(packageData))
                 {
@@ -84,15 +85,16 @@ namespace FuckASAC.Utils
                     }
                 }
             }
-            int packageId = ProtoBufUtil.GetVarIntFromBytes(packageData);
-            byte[] packageIdBytes = ProtoBufUtil.GetVarIntBytes(packageId);
+
+            List<byte> packageIdBytes = new List<byte>();
+            int packageId = ProtoBufUtil.GetVarIntFromBytes(packageData, packageIdBytes);
 
             return new Package
             {
                 PackageLength = packageLength,
                 PackageId = (byte)packageId,
                 OriginData = originData.ToArray(),
-                Data = packageData.Where((x,i) => i>= packageIdBytes.Length).ToArray()
+                Data = packageData.Where((x, i) => i >= packageIdBytes.Count).ToArray()
             };
         }
     }

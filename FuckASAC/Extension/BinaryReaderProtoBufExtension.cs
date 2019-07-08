@@ -38,6 +38,38 @@ namespace FuckASAC.Utils
         }
 
         /// <summary>
+        /// 读取BinaryReader中varint
+        /// </summary>
+        /// <param name="reader">数据流</param>
+        /// <param name="readed">已经读取的数据</param>
+        /// <returns></returns>
+        public static int ReadVarInt(this BinaryReader reader,List<byte> readed = null)
+        {
+            int numRead = 0;
+            int result = 0;
+            byte read;
+            do
+            {
+                read = reader.ReadByte();
+                if (readed != null)
+                {
+                    readed.Add(read);
+                }
+
+                int value = (read & 0x7f);
+                result |= (value << (7 * numRead));
+
+                numRead++;
+                if (numRead > 5)
+                {
+                    return 0;
+                }
+            } while ((read & 0x80) != 0);
+
+            return result;
+        }
+
+        /// <summary>
         /// 读取BinaryReader中的thisstring
         /// </summary>
         /// <param name="reader">数据流</param>

@@ -48,6 +48,7 @@ namespace FuckASAC.Utils
             }
         }
 
+
         /// <summary>
         /// 从字节数组中获取varint
         /// </summary>
@@ -73,6 +74,28 @@ namespace FuckASAC.Utils
             } while ((read & 0x80) != 0);
 
             return result;
+        }
+
+        public static int GetVarIntFromBytes(byte[] data, List<byte> readed)
+        {
+            List<byte> s = data.ToList();
+            int i = 0;
+            int j = 0;
+
+            while (true)
+            {
+                int k = s.First();
+                readed.Add((byte)k);
+                s.RemoveAt(0);
+
+                i |= (k & 0x7F) << j++ * 7;
+                if (j > 5)
+                {
+                    return 0;
+                }
+                if ((k & 0x80) != 128) break;
+            }
+            return i;
         }
     }
 }
