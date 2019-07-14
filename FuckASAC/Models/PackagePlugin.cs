@@ -29,7 +29,7 @@ namespace FuckASAC.Models
                 {
                     this.ChannelName = br.ReadVarString();
                     int channelDataLength = 0;
-                    if (Global.isCompression)
+                    if (Global.IsCompression)
                     {
                         channelDataLength = Convert.ToInt32(br.BaseStream.Length - br.BaseStream.Position);
                     }
@@ -73,7 +73,7 @@ namespace FuckASAC.Models
             if(is112)
             {
                 // 如果大于阈值 , 就压缩
-                if(packageIdAndData.Count > Global.compressionThreshold)
+                if(packageIdAndData.Count > Global.CompressionThreshold)
                 {
                     byte[] compressData = ZLibUtil.Compress(packageIdAndData.ToArray());
                     byte[] compressDataLengthBytes = ProtoBufUtil.GetVarIntBytes(packageIdAndData.Count);

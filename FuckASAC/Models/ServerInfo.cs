@@ -17,6 +17,6 @@ namespace System
         /// <summary>
         /// modlist数据包内容
         /// </summary>
-        public PackagePlugin ModList { get; set; }
+        public Package ModList { get; set; }
     }
 }

@@ -176,12 +176,12 @@ namespace FuckASAC.Utils
         {
             if (File.Exists(Global.MD5_FILE_PATH))
             {
-                Global.hasMd5File = true;
+                Global.HasMd5File = true;
                 Global.ServerInfo = SerializeUtil.DeserializeFromFile<ServerInfo>(Global.MD5_FILE_PATH);
             }
             else
             {
-                Global.hasMd5File = false;
+                Global.HasMd5File = false;
             }
         }
 

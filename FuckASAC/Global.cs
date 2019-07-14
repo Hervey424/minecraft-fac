@@ -1,6 +1,7 @@
 ﻿using FuckASAC.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -26,6 +27,15 @@ namespace FuckASAC
         /// </summary>
         public static string MD5_FILE_PATH { get;  } = "md5list.dat";
 
+        /// <summary>
+        /// 写入到服务端的流
+        /// </summary>
+        public static BinaryWriter ToServerWriter;
+
+        /// <summary>
+        /// 写入到客户端的流
+        /// </summary>
+        public static BinaryWriter ToClientWriter;
 
         /// <summary>
         /// 当前加载的md5列表
@@ -35,26 +45,26 @@ namespace FuckASAC
         /// <summary>
         /// 是否存在md5文件
         /// </summary>
-        public static bool hasMd5File { get; set; } = false;
+        public static bool HasMd5File { get; set; } = false;
 
         /// <summary>
         /// 加密md5的salt
         /// </summary>
-        public static string salt { get; set; } = string.Empty;
+        public static string Salt { get; set; } = string.Empty;
 
         /// <summary>
         /// 是否加密
         /// </summary>
-        public static bool isCompression { get; set; } = false;
+        public static bool IsCompression { get; set; } = false;
 
         /// <summary>
         /// 加密阈值
         /// </summary>
-        public static int compressionThreshold { get; set; } = 0;
+        public static int CompressionThreshold { get; set; } = 0;
 
         /// <summary>
         /// 是否为1.12.2版本
         /// </summary>
-        public static bool isVersion1_12_2 { get; set; } = false;
+        public static bool IsVersion1_12_2 { get; set; } = false;
     }
 }

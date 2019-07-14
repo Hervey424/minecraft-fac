@@ -70,7 +70,7 @@ namespace FuckASAC.Utils
             originData.AddRange(packageData);
 
             //如果压缩了, 就获取压缩后的数据
-            if (Global.isCompression)
+            if (Global.IsCompression)
             {
                 using (MemoryStream ms = new MemoryStream(packageData))
                 {

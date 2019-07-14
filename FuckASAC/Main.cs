@@ -83,7 +83,7 @@ namespace FuckASAC
                 return;
             }
 
-            Global.isVersion1_12_2 = rb1122.Checked;
+            Global.IsVersion1_12_2 = rb1122.Checked;
 
             btnStart.Enabled = false;
             btnStop.Enabled = true;
@@ -117,8 +117,8 @@ namespace FuckASAC
                 {
                     //接收客户端请求
                     TcpClient client = listener.AcceptTcpClient();
-                    Global.isCompression = false;
-                    Global.compressionThreshold = 0;
+                    Global.IsCompression = false;
+                    Global.CompressionThreshold = 0;
 
                     //设定超时，否则端口将一直被占用，即使失去连接
                     client.SendTimeout = 300000;
@@ -181,6 +181,7 @@ namespace FuckASAC
             NetworkStream ns2 = tc2.GetStream();
             BinaryReader reader = new BinaryReader(ns1);
             BinaryWriter write = new BinaryWriter(ns2);
+            Global.ToServerWriter = write;
 
             while (status)
             {
@@ -221,6 +222,8 @@ namespace FuckASAC
             NetworkStream ns2 = tc2.GetStream();
             BinaryReader reader = new BinaryReader(ns1);
             BinaryWriter write = new BinaryWriter(ns2);
+            Global.ToClientWriter = write;
+
             while (status)
             {
                 try
@@ -233,13 +236,13 @@ namespace FuckASAC
                     }
 
                     // 设置压缩阈值
-                    if (Global.isVersion1_12_2 && Global.isCompression == false && package.PackageId == 0x03)
+                    if (Global.IsVersion1_12_2 && Global.IsCompression == false && package.PackageId == 0x03)
                     {
                         int maximum = ProtoBufUtil.GetVarIntFromBytes(package.Data);
                         if (maximum >= 0)
                         {
-                            Global.isCompression = true;
-                            Global.compressionThreshold = maximum;
+                            Global.IsCompression = true;
+                            Global.CompressionThreshold = maximum;
                         }
                     }
 
