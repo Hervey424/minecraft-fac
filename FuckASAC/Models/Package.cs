@@ -8,6 +8,7 @@ namespace FuckASAC.Models
     /// <summary>
     /// 协议数据包
     /// </summary>
+    [Serializable]
     public class Package
     {
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FuckASAC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,11 +27,10 @@ namespace FuckASAC
         public static string MD5_FILE_PATH { get;  } = "md5list.dat";
 
 
-
         /// <summary>
         /// 当前加载的md5列表
         /// </summary>
-        public static List<string> md5List { get; set; } = new List<string>();
+        public static ServerInfo ServerInfo { get; set; } = new ServerInfo();
 
         /// <summary>
         /// 是否存在md5文件

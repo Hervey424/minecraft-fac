@@ -188,47 +188,14 @@ namespace FuckASAC
                 {
                     Package package = reader.ReadPackage();
 
-                    //只处理pluginpackage
-                    byte pluginPackageId = (byte)(Global.isVersion1_12_2 ? 0x09 : 0x17);
-                    if (package.PackageId == pluginPackageId)
+                    if (Plugins.Plugins.CTSHandle(package, write))
                     {
-                        PackagePlugin plugin = new PackagePlugin(package);
-
-                        //处理指定的channel
-                        if (Global.ASAC_CHANNEL_NAMES.Contains(plugin.ChannelName))
-                        {
-                            if (Global.hasMd5File)
-                            {
-                                bool isUseRSA = ASACUtil.IsNeedRSA(plugin.ChannelData,Global.isVersion1_12_2);
-                                byte[] md5sNBTByteArray = ASACUtil.GetMd5NBTByteArray(isUseRSA, Global.md5List, Global.salt,Global.isVersion1_12_2);
-
-                                MemoryStream channelDataStream = new MemoryStream();
-                                using (BinaryWriter bw = new BinaryWriter(channelDataStream))
-                                {
-                                    bw.Write((byte)plugin.ChannelData[0]);
-                                    // 如果是1.12, 这里不需要写入长度
-                                    if(!Global.isVersion1_12_2)
-                                    {
-                                        bw.WriteUInt16BE((UInt16)md5sNBTByteArray.Length);
-                                    }
-                                    bw.Write(md5sNBTByteArray);
-                                }
-                                byte[] channelData = channelDataStream.ToArray();
-                                PackagePlugin newPackage = new PackagePlugin(pluginPackageId, plugin.ChannelName, channelData, Global.isVersion1_12_2);
-                                write.Write(newPackage.OriginData);
-                                continue;
-                            }
-                            else
-                            {
-                                Global.md5List = ASACUtil.GetMd5ListFromNBTByteArray(plugin.ChannelData,Global.isVersion1_12_2);
-                                SerializeUtil.SerializeToFile("md5list.dat", Global.md5List);
-                                Global.hasMd5File = true;
-                            }
-                        }
+                        continue;
                     }
+
                     write.Write(package.OriginData);
                 }
-                catch(Exception ex)
+                catch
                 {
                     break;
                 }
@@ -259,26 +226,12 @@ namespace FuckASAC
                 try
                 {
                     Package package = reader.ReadPackage();
-                    // 插件消息
-                    byte pluginPackageId = (byte)(Global.isVersion1_12_2 ? 0x18 : 0x3f);
-                    if (package.PackageId == pluginPackageId)
+
+                    if (Plugins.Plugins.STCHandle(package, write))
                     {
-                        PackagePlugin plugin = new PackagePlugin(package);
-                        if (Global.ASAC_CHANNEL_NAMES.Contains(plugin.ChannelName))
-                        {
-                            if (Global.hasMd5File)
-                            {
-                                Global.salt = ASACUtil.GetSaltFromNBTByteArray(plugin.ChannelData,Global.isVersion1_12_2);
-                            }
-                            else
-                            {
-                                byte[] channelData = ASACUtil.GetSaltNBTDataArrayFromSaltString(string.Empty, Global.isVersion1_12_2);
-                                PackagePlugin newPackage = new PackagePlugin(pluginPackageId, plugin.ChannelName, channelData, Global.isVersion1_12_2);
-                                write.Write(newPackage.OriginData);
-                                continue;
-                            }
-                        }
+                        continue;
                     }
+
                     // 设置压缩阈值
                     if (Global.isVersion1_12_2 && Global.isCompression == false && package.PackageId == 0x03)
                     {
@@ -289,9 +242,10 @@ namespace FuckASAC
                             Global.compressionThreshold = maximum;
                         }
                     }
+
                     write.Write(package.OriginData);
                 }
-                catch(Exception ex)
+                catch
                 {
                     break;
                 }

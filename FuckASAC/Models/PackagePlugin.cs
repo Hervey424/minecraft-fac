@@ -10,6 +10,7 @@ namespace FuckASAC.Models
     /// <summary>
     /// 插件消息数据包
     /// </summary>
+    [Serializable]
     public class PackagePlugin : Package
     {
         /// <summary>
