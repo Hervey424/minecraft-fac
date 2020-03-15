@@ -8,7 +8,7 @@
     <ProjectGuid>{15227803-496E-4DD4-80A3-6098F694DE17}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>我的世界反反作弊</RootNamespace>
+    <RootNamespace>FuckASAC</RootNamespace>
     <AssemblyName>FuckASAC</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -125,8 +125,14 @@
     <Compile Include="NBT\TagShort.cs" />
     <Compile Include="NBT\TagString.cs" />
     <Compile Include="NBT\TagType.cs" />
-    <Compile Include="Plugins\ASACPlugin.cs" />
+    <Compile Include="Plugins\AbsolutePlugin.cs" />
+    <Compile Include="Plugins\CatAntiCheat\CatAntiCheatData.cs" />
+    <Compile Include="Plugins\CatAntiCheat\CatAntiCheatMessageType.cs" />
+    <Compile Include="Plugins\PluginMessageHandle.cs" />
+    <Compile Include="Plugins\ASAC\ASACPlugin.cs" />
+    <Compile Include="Plugins\CatAntiCheat\CatAntiCheatPlugin.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
+    <Compile Include="Plugins\ModList\ModListPlugin.cs" />
     <Compile Include="Plugins\Plugins.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

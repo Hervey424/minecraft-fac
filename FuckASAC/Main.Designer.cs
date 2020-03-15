@@ -33,7 +33,6 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.lblTip = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.btnCopy = new System.Windows.Forms.Button();
             this.cbServer = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -52,7 +51,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(15, 124);
+            this.btnStart.Location = new System.Drawing.Point(16, 102);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 2;
@@ -63,7 +62,7 @@
             // btnStop
             // 
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(113, 124);
+            this.btnStop.Location = new System.Drawing.Point(107, 102);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 23);
             this.btnStop.TabIndex = 3;
@@ -79,16 +78,6 @@
             this.lblTip.Size = new System.Drawing.Size(281, 12);
             this.lblTip.TabIndex = 6;
             this.lblTip.Text = "请在游戏中把服务器地址设置为127.0.0.1:本地端口";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label2.Location = new System.Drawing.Point(14, 99);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(203, 12);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "此软件只针对AnotherAntiCheat2.0.0";
             // 
             // btnCopy
             // 
@@ -144,13 +133,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(420, 165);
+            this.ClientSize = new System.Drawing.Size(420, 144);
             this.Controls.Add(this.rb1122);
             this.Controls.Add(this.rb1710);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cbServer);
             this.Controls.Add(this.btnCopy);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTip);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
@@ -160,7 +148,7 @@
             this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "反AnotherAntiCheat V1.1 - 交流群:543258992";
+            this.Text = "反作弊破解 V1.1 - 交流群:543258992";
             this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -173,7 +161,6 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Label lblTip;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnCopy;
         private System.Windows.Forms.ComboBox cbServer;
         private System.Windows.Forms.Label label3;

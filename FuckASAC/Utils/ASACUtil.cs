@@ -168,24 +168,6 @@ namespace FuckASAC.Utils
         }
 
         /// <summary>
-        /// 从本地加载md5列表
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public static void LoadMd5ListFromFile()
-        {
-            if (File.Exists(Global.MD5_FILE_PATH))
-            {
-                Global.HasMd5File = true;
-                Global.ServerInfo = SerializeUtil.DeserializeFromFile<ServerInfo>(Global.MD5_FILE_PATH);
-            }
-            else
-            {
-                Global.HasMd5File = false;
-            }
-        }
-
-        /// <summary>
         /// 从文件Ian
         /// </summary>
         /// <returns></returns>

@@ -14,14 +14,20 @@ namespace FuckASAC.Plugins
         static Plugins()
         {
             plugins = new List<IPlugin>();
+            // 必要插件
+            plugins.Add(new ModListPlugin());
+            // ASAC
             plugins.Add(new ASACPlugin());
+            // CatAntiCheat
+            plugins.Add(new CatAntiCheatPlugin());
+
         }
 
-        public static bool STCHandle(Package package, BinaryWriter write)
+        public static bool STCHandle(Package package, BinaryWriter toClientWriter, BinaryWriter toServerWriter)
         {
             foreach(IPlugin plugin in plugins)
             {
-                bool result = plugin.STCHandle(package, write);
+                bool result = plugin.STCHandle(package, toClientWriter, toServerWriter);
                 if(result)
                 {
                     return true;
@@ -30,11 +36,11 @@ namespace FuckASAC.Plugins
             return false;
         }
 
-        public static bool CTSHandle(Package package, BinaryWriter write)
+        public static bool CTSHandle(Package package, BinaryWriter toClientWriter, BinaryWriter toServerWriter)
         {
             foreach (IPlugin plugin in plugins)
             {
-                bool result = plugin.CTSHandle(package, write);
+                bool result = plugin.CTSHandle(package, toClientWriter, toServerWriter);
                 if (result)
                 {
                     return true;

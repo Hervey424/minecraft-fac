@@ -13,11 +13,6 @@ namespace FuckASAC
     public static class Global
     {
         /// <summary>
-        /// ASAC的channel列表
-        /// </summary>
-        public static List<string> ASAC_CHANNEL_NAMES { get; } = new List<string> { "anotheranticheat", "anotherstaranticheat", "AnotherStarAntiCheat" };
-
-        /// <summary>
         /// 本地端口
         /// </summary>
         public static int LOCAL_PORT { get;  } = 25555;
@@ -36,21 +31,6 @@ namespace FuckASAC
         /// 写入到客户端的流
         /// </summary>
         public static BinaryWriter ToClientWriter;
-
-        /// <summary>
-        /// 当前加载的md5列表
-        /// </summary>
-        public static ServerInfo ServerInfo { get; set; } = new ServerInfo();
-
-        /// <summary>
-        /// 是否存在md5文件
-        /// </summary>
-        public static bool HasMd5File { get; set; } = false;
-
-        /// <summary>
-        /// 加密md5的salt
-        /// </summary>
-        public static string Salt { get; set; } = string.Empty;
 
         /// <summary>
         /// 是否加密

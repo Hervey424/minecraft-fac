@@ -27,6 +27,8 @@ namespace FuckASAC
         private TcpListener listener = null;
         private string ServerAdddress = string.Empty;
         private string localAddress = string.Empty;
+        BinaryWriter toClientWriter;
+        BinaryWriter toServerWriter;
 
         public Main()
         {
@@ -41,7 +43,6 @@ namespace FuckASAC
             {
                 MessageBox.Show("请把软件放到客户端目录再运行!", "错误");
             }
-            ASACUtil.LoadMd5ListFromFile();
             cbServer.DataSource = ASACUtil.LoadServerUrlFromFile();
         }
 
@@ -180,8 +181,8 @@ namespace FuckASAC
             NetworkStream ns1 = tc1.GetStream();
             NetworkStream ns2 = tc2.GetStream();
             BinaryReader reader = new BinaryReader(ns1);
-            BinaryWriter write = new BinaryWriter(ns2);
-            Global.ToServerWriter = write;
+            toServerWriter = new BinaryWriter(ns2);
+            Global.ToServerWriter = toServerWriter;
 
             while (status)
             {
@@ -189,12 +190,12 @@ namespace FuckASAC
                 {
                     Package package = reader.ReadPackage();
 
-                    if (Plugins.Plugins.CTSHandle(package, write))
+                    if (Plugins.Plugins.CTSHandle(package, toClientWriter, toServerWriter))
                     {
                         continue;
                     }
 
-                    write.Write(package.OriginData);
+                    toServerWriter.Write(package.OriginData);
                 }
                 catch
                 {
@@ -202,7 +203,7 @@ namespace FuckASAC
                 }
             }
 
-            write.Close();
+            toServerWriter.Close();
             reader.Close();
             ns1.Dispose();
             ns2.Dispose();
@@ -221,8 +222,8 @@ namespace FuckASAC
             NetworkStream ns1 = tc1.GetStream();
             NetworkStream ns2 = tc2.GetStream();
             BinaryReader reader = new BinaryReader(ns1);
-            BinaryWriter write = new BinaryWriter(ns2);
-            Global.ToClientWriter = write;
+            toClientWriter = new BinaryWriter(ns2);
+            Global.ToClientWriter = toClientWriter;
 
             while (status)
             {
@@ -230,7 +231,7 @@ namespace FuckASAC
                 {
                     Package package = reader.ReadPackage();
 
-                    if (Plugins.Plugins.STCHandle(package, write))
+                    if (Plugins.Plugins.STCHandle(package, toClientWriter, toServerWriter))
                     {
                         continue;
                     }
@@ -246,7 +247,7 @@ namespace FuckASAC
                         }
                     }
 
-                    write.Write(package.OriginData);
+                    toClientWriter.Write(package.OriginData);
                 }
                 catch
                 {
@@ -254,7 +255,7 @@ namespace FuckASAC
                 }
             }
 
-            write.Close();
+            toClientWriter.Close();
             reader.Close();
             ns1.Dispose();
             ns2.Dispose();
