@@ -37,17 +37,20 @@ namespace FuckASAC.Plugins
         /// <returns></returns>
         public override bool CTSPluginMessageHandle(PackagePlugin package, BinaryWriter toClientWriter, BinaryWriter toServerWriter)
         {
+            // 确定是modlist
             if(package.ChannelData.Length > 0 && package.ChannelData[0] == 2)
             {
                 // 如果不存在, 就创建并保存文件
                 if (!File.Exists(fileName))
                 {
+                    Console.WriteLine($"[公共][{fileName}]不存在, 创建文件成功!");
                     SerializeUtil.SerializeToFile(fileName, package);
                 }
 
                 // 读取文件内容并发送给服务端
                 PackagePlugin local = SerializeUtil.DeserializeFromFile<PackagePlugin>(fileName);
                 toServerWriter.Write(local.OriginData);
+
                 // 丢掉客户端发来的数据
                 return true;
             }

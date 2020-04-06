@@ -48,7 +48,7 @@ namespace FuckASAC.Models
         /// <param name="packageId">packageId</param>
         /// <param name="ChannelName">ChannelName</param>
         /// <param name="ChannelData">ChannelData</param>
-        public PackagePlugin(byte packageId , string ChannelName, byte[] ChannelData, bool is112)
+        public PackagePlugin(byte packageId, string ChannelName, byte[] ChannelData, bool is112)
         {
             //成员
             this.ChannelName = ChannelName;
@@ -59,7 +59,7 @@ namespace FuckASAC.Models
             //Data
             List<byte> data = new List<byte>();
             data.AddRange(ProtoBufUtil.GetVarStringBytes(ChannelName));
-            if(!is112)
+            if (!is112)
             {
                 data.AddRange(channelDataLengthBytes);
             }
@@ -70,10 +70,10 @@ namespace FuckASAC.Models
             List<byte> packageIdAndData = new List<byte>();
             packageIdAndData.Add(packageId);
             packageIdAndData.AddRange(data);
-            if(is112)
+            if (is112)
             {
                 // 如果大于阈值 , 就压缩
-                if(packageIdAndData.Count > Global.CompressionThreshold)
+                if (packageIdAndData.Count > Global.CompressionThreshold)
                 {
                     byte[] compressData = ZLibUtil.Compress(packageIdAndData.ToArray());
                     byte[] compressDataLengthBytes = ProtoBufUtil.GetVarIntBytes(packageIdAndData.Count);
@@ -85,7 +85,7 @@ namespace FuckASAC.Models
                 }
                 else
                 {
-                    byte[] lengthBytes = ProtoBufUtil.GetVarIntBytes(packageIdAndData.Count+1);
+                    byte[] lengthBytes = ProtoBufUtil.GetVarIntBytes(packageIdAndData.Count + 1);
                     originData.AddRange(lengthBytes);
                     originData.Add(0);
                     originData.AddRange(packageIdAndData);
@@ -103,6 +103,7 @@ namespace FuckASAC.Models
             this.Data = data.ToArray();
             this.OriginData = originData.ToArray();
         }
+
 
         /// <summary>
         /// 通道名称

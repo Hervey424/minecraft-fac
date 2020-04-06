@@ -44,6 +44,7 @@ namespace FuckASAC
                 MessageBox.Show("请把软件放到客户端目录再运行!", "错误");
             }
             cbServer.DataSource = ASACUtil.LoadServerUrlFromFile();
+            Console.WriteLine("[公共]程序初始化完成");
         }
 
 
@@ -92,6 +93,7 @@ namespace FuckASAC
             rb1122.Enabled = false;
             rb1710.Enabled = false;
             lblTip.Text = "请在服务器地址填写127.0.0.1:"+ Global.LOCAL_PORT + "进入游戏 ";
+            Console.WriteLine("[公共]开启成功,"+ lblTip.Text);
 
             status = true;
             btnCopy.Visible = true;
@@ -159,6 +161,7 @@ namespace FuckASAC
             btnCopy.Visible = false;
             rb1122.Enabled = true;
             rb1710.Enabled = true;
+            Console.WriteLine("[公共]" + msg);
         }
 
         private void btnStop_Click(object sender, EventArgs e)

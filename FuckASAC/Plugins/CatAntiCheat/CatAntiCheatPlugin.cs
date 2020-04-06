@@ -90,7 +90,7 @@ namespace FuckASAC.Plugins
             int type = package.ChannelData[0];
 
             // hello package
-            if(type == (int)CatAntiCheatMessageType.STCHello)
+            if (type == (int)CatAntiCheatMessageType.STCHello)
             {
                 return HelloHandle(package, toClientWriter, toServerWriter);
             }
@@ -128,6 +128,7 @@ namespace FuckASAC.Plugins
         {
             if(!File.Exists("screen.png"))
             {
+                Console.WriteLine($"[CatAntiCheat]收到服务端截图请求, screen.png不存在, 不返回任何内容 , 建议你立即换号");
                 return true;
             }
             byte[] bytes = File.ReadAllBytes("screen.png");
@@ -154,6 +155,7 @@ namespace FuckASAC.Plugins
                             break;
                         }
                     }
+                    Console.WriteLine($"[CatAntiCheat]收到服务端截图请求, 返回screen.png");
                 }
             }
             return true;
@@ -161,6 +163,8 @@ namespace FuckASAC.Plugins
 
         /// <summary>
         /// 处理服务端classcheck
+        /// 1.2.7 之后会随机发送一个类, 所以这里如果找到了就返回
+        /// 如果找不到就说明是之前的版本, 就返回别的
         /// </summary>
         /// <param name="package"></param>
         /// <param name="toClientWriter"></param>
@@ -168,10 +172,43 @@ namespace FuckASAC.Plugins
         /// <returns></returns>
         private bool ClassCheckHandle(PackagePlugin package, BinaryWriter toClientWriter, BinaryWriter toServerWriter)
         {
-            byte[] data = { (byte)CatAntiCheatMessageType.CTSClassFound, 0, salt };
-            PackagePlugin fake = new PackagePlugin(CTSPluginPackageId, package.ChannelName, data, Global.IsVersion1_12_2);
-            toServerWriter.Write(fake.OriginData);
-            return true;
+            List<string> randomClassNames = new List<string>
+            {
+                "net.minecraft.launchwrapper.Launch",
+                "net.minecraft.launchwrapper.LogWrapper",
+                "net.minecraft.launchwrapper.AlphaVanillaTweaker"
+            };
+            using (MemoryStream ms = new MemoryStream(package.ChannelData, 1, package.ChannelData.Length - 1))
+            {
+                using (BinaryReader br = new BinaryReader(ms))
+                {
+                    Int16 size = br.ReadInt16BE();
+                    List<string> classNames = new List<string>();
+                    for(int i = 0;i< size;i++)
+                    {
+                        classNames.Add(br.ReadVarString());
+                    }
+                    var exist = classNames.Intersect(randomClassNames).FirstOrDefault();
+                    List<byte> bytes = new List<byte>();
+                    if(string.IsNullOrEmpty(exist))
+                    {
+                        bytes = new List<byte> { (byte)CatAntiCheatMessageType.CTSClassFound, 0, 0, salt };
+                        Console.WriteLine($"[CatAntiCheat]收到服务端ClassCheck请求, 直接返回无作弊!");
+                    }
+                    else
+                    {
+                        bytes = new List<byte> { (byte)CatAntiCheatMessageType.CTSClassFound };
+                        bytes.AddRange(BitConverter.GetBytes((short)1).Reverse());
+                        bytes.AddRange(ProtoBufUtil.GetVarStringBytes(exist));
+                        bytes.Add(salt);
+                        Console.WriteLine($"[CatAntiCheat]收到服务端ClassCheck请求, 直接返回[{exist}]");
+                    }
+
+                    PackagePlugin fake = new PackagePlugin(CTSPluginPackageId, package.ChannelName, bytes.ToArray(), Global.IsVersion1_12_2);
+                    toServerWriter.Write(fake.OriginData);
+                    return true;
+                }
+            }
         }
 
         /// <summary>
@@ -208,6 +245,7 @@ namespace FuckASAC.Plugins
                         SerializeUtil.SerializeToFile(fileName, local);
                     }
                 }
+                Console.WriteLine($"[CatAntiCheat]本地文件[{fileName}]不存在, 创建完成");
             }
             LocalData = SerializeUtil.DeserializeFromFile<CatAntiCheatData>(fileName);
 
@@ -240,7 +278,9 @@ namespace FuckASAC.Plugins
                 buffers.AddRange(zipedData);
                 //sign
                 buffers.AddRange(BitConverter.GetBytes((int)hashCode(zipedData)).Reverse());
-       
+
+                Console.WriteLine($"[CatAntiCheat]收到服务端FileCheck请求, 直接返回本地{fileName}中的数据!");
+
                 PackagePlugin fakerPackage = new PackagePlugin(CTSPluginPackageId, package.ChannelName, buffers.ToArray(), Global.IsVersion1_12_2);
                 toServerWriter.Write(fakerPackage.OriginData);
                 return true;
@@ -256,6 +296,7 @@ namespace FuckASAC.Plugins
         /// <returns></returns>
         private bool DataCheckHandle(PackagePlugin package, BinaryWriter toClientWriter, BinaryWriter toServerWriter)
         {
+            Console.WriteLine($"[CatAntiCheat]收到服务端DataCheck请求, 直接返回无作弊!");
             //lighting和transparentTexture
             byte[] bytes = { (byte)CatAntiCheatMessageType.CTSDataCheckReply, 0, 0 };
             PackagePlugin fakerPackage = new PackagePlugin(CTSPluginPackageId, package.ChannelName, bytes, Global.IsVersion1_12_2);
@@ -281,8 +322,10 @@ namespace FuckASAC.Plugins
                 byte[] bytes = { (byte)CatAntiCheatMessageType.CTSHelloReply, versionBytes[1], versionBytes[0], salt };
                 PackagePlugin fakerPackage = new PackagePlugin(CTSPluginPackageId, package.ChannelName, bytes, Global.IsVersion1_12_2);
                 toServerWriter.Write(fakerPackage.OriginData);
+                Console.WriteLine($"[CatAntiCheat]收到服务端Hello请求 Salt={salt}, 返回Salt={salt}, Version={LocalData.Version}");
                 return true;
             }
+
             return false;
         }
 

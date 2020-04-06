@@ -51,6 +51,8 @@ namespace FuckASAC.Plugins
         {
             List<string> md5list = ASACUtil.GetMd5ListFromNBTByteArray(package.ChannelData, Global.IsVersion1_12_2);
             SerializeUtil.SerializeToFile(fileName, md5list);
+
+            Console.WriteLine($"[AnotherAntiCheat]本地文件{fileName}不存在, 创建文件成功");
             // 继续发送原数据包, 然后会被T出服务器
             return false;
         }
@@ -70,6 +72,9 @@ namespace FuckASAC.Plugins
                 Salt = ASACUtil.GetSaltFromNBTByteArray(package.ChannelData, Global.IsVersion1_12_2);
                 // 把列表发送过去
                 SendMd5List(package.ChannelName, toServerWriter);
+
+                Console.WriteLine($"[AnotherAntiCheat]收到服务端检测MD5请求, Salt={Salt}, 返回{fileName}中的列表");
+
                 return true;
             }
             else
@@ -77,6 +82,9 @@ namespace FuckASAC.Plugins
                 byte[] channelData = ASACUtil.GetSaltNBTDataArrayFromSaltString(string.Empty, Global.IsVersion1_12_2);
                 PackagePlugin newPackage = new PackagePlugin(STCPluginPackageId, package.ChannelName, channelData, Global.IsVersion1_12_2);
                 toClientWriter.Write(newPackage.OriginData);
+
+                Console.WriteLine($"[AnotherAntiCheat]收到服务端检测MD5请求, 本地文件不存在, 获取MD5列表");
+
                 return true;
             }
         }

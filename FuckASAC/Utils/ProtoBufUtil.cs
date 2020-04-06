@@ -21,9 +21,9 @@ namespace FuckASAC.Utils
         public static byte[] GetVarStringBytes(string content)
         {
             List<byte> output = new List<byte>();
-
-            output.AddRange(GetVarIntBytes(content.Length));
-            output.AddRange(Encoding.UTF8.GetBytes(content));
+            byte[] bytes = Encoding.UTF8.GetBytes(content);
+            output.AddRange(GetVarIntBytes(bytes.Length));
+            output.AddRange(bytes);
 
             return output.ToArray();
         }
