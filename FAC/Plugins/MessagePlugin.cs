@@ -11,7 +11,7 @@ namespace FAC.Plugins
     /// 处理pluginmessage
     /// 自动根据channel匹配
     /// </summary>
-    public abstract class PluginMessageHandle : IPlugin
+    public abstract class MessagePlugin : IPlugin
     {
         /// <summary>
         /// 客户端->服务端 plugin的PackageId

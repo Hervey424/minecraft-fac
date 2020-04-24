@@ -16,7 +16,7 @@ namespace FAC.Plugins
     /// 3. 客户端把没有hash的md5列表发送过来
     /// 4. 程序保存文件, 以后所有请求会发送给客户端本文件
     /// </summary>
-    public class ASACPlugin : AbsolutePlugin
+    public class ASACPlugin : AbsoluteMessagePlugin
     {
         /// <summary>
         /// 加密md5的salt

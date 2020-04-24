@@ -18,19 +18,14 @@ namespace FAC
         public static int LOCAL_PORT { get;  } = 25555;
 
         /// <summary>
-        /// md5列表文件路径
-        /// </summary>
-        public static string MD5_FILE_PATH { get;  } = "md5list.dat";
-
-        /// <summary>
         /// 写入到服务端的流
         /// </summary>
-        public static BinaryWriter ToServerWriter;
+        public static BinaryWriter ToServerWriter { get; set; }
 
         /// <summary>
         /// 写入到客户端的流
         /// </summary>
-        public static BinaryWriter ToClientWriter;
+        public static BinaryWriter ToClientWriter { get; set; }
 
         /// <summary>
         /// 是否加密

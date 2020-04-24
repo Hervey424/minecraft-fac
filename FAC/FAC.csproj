@@ -55,7 +55,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>bitbug_favicon.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\bitbug_favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -126,10 +126,10 @@
     <Compile Include="NBT\TagShort.cs" />
     <Compile Include="NBT\TagString.cs" />
     <Compile Include="NBT\TagType.cs" />
-    <Compile Include="Plugins\AbsolutePlugin.cs" />
+    <Compile Include="Plugins\AbsoluteMessagePlugin.cs" />
     <Compile Include="Plugins\CatAntiCheat\CatAntiCheatData.cs" />
     <Compile Include="Plugins\CatAntiCheat\CatAntiCheatMessageType.cs" />
-    <Compile Include="Plugins\PluginMessageHandle.cs" />
+    <Compile Include="Plugins\MessagePlugin.cs" />
     <Compile Include="Plugins\ASAC\ASACPlugin.cs" />
     <Compile Include="Plugins\CatAntiCheat\CatAntiCheatPlugin.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
@@ -176,7 +176,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bitbug_favicon.ico" />
+    <Content Include="Assets\bitbug_favicon.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

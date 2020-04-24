@@ -11,7 +11,7 @@ namespace FAC.Plugins
     /// <summary>
     /// 保存玩家正常的modlist用来躲避检测
     /// </summary>
-    public class ModListPlugin : AbsolutePlugin
+    public class ModListPlugin : AbsoluteMessagePlugin
     {
         /// <summary>
         /// 保存的文件名

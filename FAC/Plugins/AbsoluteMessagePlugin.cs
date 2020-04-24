@@ -7,7 +7,7 @@ using System.Text;
 
 namespace FAC.Plugins
 {
-    public abstract class AbsolutePlugin : PluginMessageHandle
+    public abstract class AbsoluteMessagePlugin : MessagePlugin
     {
         public override bool CTSPluginMessageHandle(PackagePlugin package, BinaryWriter toClientWriter, BinaryWriter toServerWriter)
         {

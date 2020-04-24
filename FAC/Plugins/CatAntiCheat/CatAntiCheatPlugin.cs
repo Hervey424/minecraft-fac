@@ -19,7 +19,7 @@ namespace FAC.Plugins
     /// 5. S->C:服务端发送给客户端FileCheck
     /// 6. C->S:客户端发送给服务端salt, hash列表, 签名
     /// </summary>
-    public class CatAntiCheatPlugin : AbsolutePlugin
+    public class CatAntiCheatPlugin : AbsoluteMessagePlugin
     {
 
         public CatAntiCheatPlugin()
@@ -174,9 +174,13 @@ namespace FAC.Plugins
         {
             List<string> randomClassNames = new List<string>
             {
+                // v1.2.7
                 "net.minecraft.launchwrapper.Launch",
                 "net.minecraft.launchwrapper.LogWrapper",
-                "net.minecraft.launchwrapper.AlphaVanillaTweaker"
+                "net.minecraft.launchwrapper.AlphaVanillaTweaker",
+                // v1.2.8
+                "net.minecraft.launchwrapper.injector.VanillaTweakInjector", 
+                "io.netty.bootstrap.Bootstrap"
             };
             using (MemoryStream ms = new MemoryStream(package.ChannelData, 1, package.ChannelData.Length - 1))
             {
