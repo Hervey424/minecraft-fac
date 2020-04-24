@@ -148,7 +148,7 @@
             this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "反作弊破解 V1.2 - 交流群:543258992";
+            this.Text = "反作弊破解 V1.3 - 交流群:543258992";
             this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
